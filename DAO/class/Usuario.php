@@ -51,6 +51,46 @@ class Usuario {
 			echo "Não contém este id cadastrado!";
 		}
 	}
+	// função para retornar uma lista de todos os usuários
+	public static function getList(){
+		// chamo a funçao sql
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+	}
+	// função para filtrar por nome de usuário
+	public static function search($login){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
+				':SEARCH'=>"%".$login."%"
+		));
+	}
+	// metodo para filtrar mais do que um campo
+
+	public function login($login, $password){
+
+		$sql = new Sql();
+		// crio minha consulta
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(":LOGIN"=>$login,
+			":PASSWORD"=>$password
+		));
+		// faço uma validação para verificar se irá retornar informação
+		if (count($results) > 0) {
+			// se conter registro irá pegar o resultado e setar na variavel row
+			$row = $results[0];
+			// crio os set
+			$this->setIdusuario($row['idusuario']);
+			$this->setDeslogin($row['deslogin']);
+			$this->setDessenha($row['dessenha']);
+			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+		} else {
+
+			throw new Exception("Login e/ou senha inválidos!");
+			
+		}
+	}
 
 	public function __toString(){
 

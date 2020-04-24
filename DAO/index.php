@@ -40,5 +40,21 @@ $usuario->login("root", "!@#$");
 
 echo $usuario;
 
+echo "<br>";
+
+echo "<strong>inserindo usuário</strong> <br>";
+
+// inserindo usuário
+
+$aluno = new Usuario();
+// informo usuario e senha com o set
+$aluno->setDeslogin("aluno");
+$aluno->setDessenha("@lun0");
+// chamo o metodo insert para inserir as informações
+$aluno->insert();
+// carrego o usuário que foi inserido
+echo $aluno;
+
+
 
  ?>

@@ -46,6 +46,9 @@ class Usuario {
 			$this->setDeslogin($row['deslogin']);
 			$this->setDessenha($row['dessenha']);
 			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+		} else {
+
+			echo "Não contém este id cadastrado!";
 		}
 	}
 
@@ -57,6 +60,7 @@ class Usuario {
 			"dessenha"=>$this->getDessenha(),
 			"dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
 		));
+
 	}
 }
 

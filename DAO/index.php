@@ -66,5 +66,18 @@ $usuario->update("professor", "!@#$%¨&*");
 
 echo $usuario;
 
+echo "<br>";
+
+echo "<strong>deletando usuário</strong> <br>";
+
+// utilizando o método para excluir um usuário
+
+$usuario = new Usuario();
+
+$usuario->loadById(7);
+
+$usuario->delete();
+
+echo $usuario;
 
  ?>

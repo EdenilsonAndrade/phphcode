@@ -123,6 +123,20 @@ class Usuario {
 			':ID'=>$this->getIdusuario()
 		));
 	}
+	// metodo para deletar registro
+	public function delete(){
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID", array(
+			':ID'=>$this->getIdusuario()
+		));
+		// após deletar o registro eu posso zerar as informações da memória
+		$this->setIdusuario(0);
+		$this->setDeslogin("");
+		$this->setDessenha("");
+		$this->setDtcadastro(new DateTime());
+	}
 
 	// metodo construtor para informar diretamente no metodo o login e senha como no caso do insert no arquivo index. Nos parametros está sendo utilizado o = "" para se não for informado não ocorrer erro
 	public function __construct($login = "", $password = ""){

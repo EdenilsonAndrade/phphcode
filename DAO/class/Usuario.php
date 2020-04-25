@@ -98,7 +98,7 @@ class Usuario {
 
 		$sql = new Sql();
 		// utilizado o método select para retonar o id que foi inserido na tabela
-		$results = $sql->select("CALL sq_usuarios_insert(:LOGIN, :PASSWORD)", array(
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
 			":LOGIN"=>$this->getDeslogin(),
 			":PASSWORD"=>$this->getDessenha()
 		));
@@ -106,7 +106,14 @@ class Usuario {
 		if (count($results) > 0) {
 
 			$this->setData($results[0]);
+
 		}
+	}
+	// metodo construtor para informar diretamente no metodo o login e senha como no caso do insert no arquivo index. Nos parametros está sendo utilizado o = "" para se não for informado não ocorrer erro
+	public function __construct($login = '', $password = ''){
+
+		$this->setDeslogin($login);
+		$this->setDessenha($password);
 	}
 
 	public function __toString(){

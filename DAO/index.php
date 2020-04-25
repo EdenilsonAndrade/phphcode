@@ -44,12 +44,9 @@ echo "<br>";
 
 echo "<strong>inserindo usuário</strong> <br>";
 
-// inserindo usuário
+// inserindo usuário, está sendo informado como parametro o nome e senha pois na classe usuário contém um metodo construtor para isso
 
-$aluno = new Usuario();
-// informo usuario e senha com o set
-$aluno->setDeslogin("aluno");
-$aluno->setDessenha("@lun0");
+$aluno = new Usuario('aluno', '@lun0');
 // chamo o metodo insert para inserir as informações
 $aluno->insert();
 // carrego o usuário que foi inserido

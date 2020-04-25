@@ -99,8 +99,8 @@ class Usuario {
 		$sql = new Sql();
 		// utilizado o método select para retonar o id que foi inserido na tabela
 		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
-			":LOGIN"=>$this->getDeslogin(),
-			":PASSWORD"=>$this->getDessenha()
+			':LOGIN'=>$this->getDeslogin(),
+			':PASSWORD'=>$this->getDessenha()
 		));
 
 		if (count($results) > 0) {
@@ -109,8 +109,23 @@ class Usuario {
 
 		}
 	}
+	// metodo para alterar usuario e senha
+	public function update($login, $password){
+
+		$this->setDeslogin($login);
+		$this->setDessenha($password);
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = :ID", array(
+			':LOGIN'=>$this->getDeslogin(),
+			':PASSWORD'=>$this->getDessenha(),
+			':ID'=>$this->getIdusuario()
+		));
+	}
+
 	// metodo construtor para informar diretamente no metodo o login e senha como no caso do insert no arquivo index. Nos parametros está sendo utilizado o = "" para se não for informado não ocorrer erro
-	public function __construct($login = '', $password = ''){
+	public function __construct($login = "", $password = ""){
 
 		$this->setDeslogin($login);
 		$this->setDessenha($password);

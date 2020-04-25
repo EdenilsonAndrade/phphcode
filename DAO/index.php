@@ -46,12 +46,25 @@ echo "<strong>inserindo usuário</strong> <br>";
 
 // inserindo usuário, está sendo informado como parametro o nome e senha pois na classe usuário contém um metodo construtor para isso
 
-$aluno = new Usuario('aluno', '@lun0');
+$aluno = new Usuario("aluno", "@lun0");
 // chamo o metodo insert para inserir as informações
 $aluno->insert();
 // carrego o usuário que foi inserido
 echo $aluno;
 
+echo "<br>";
+
+echo "<strong>alterando usuário e senha</strong> <br>";
+
+// alterando um usuário
+// chamo a classe usuário
+$usuario = new Usuario();
+// busco as informações do usuário que eu quero alterar
+$usuario->loadById(8);
+
+$usuario->update("professor", "!@#$%¨&*");
+
+echo $usuario;
 
 
  ?>
